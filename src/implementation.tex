@@ -25,7 +25,12 @@ sys_recvfrom(int sock, char *buff, int size, sockaddr *from);
 The plugin needs to specify the protocol used only when the socket is created,
 but for all subsequent calls this will be handled by internal systems. 
 
-\includegraphics[scale=0.75]{img/networking.pdf}
+\begin{figure}[htb]
+  \begin{center}
+    \includegraphics[scale=0.75]{img/networking.pdf}
+    \caption{Network packet flow}
+  \end{center}
+\end{figure}
 
 The flow of a network packet will start in the plugin. It will create a socket
 using sys\_socket and will be able to send data using sys_sendto. In the
