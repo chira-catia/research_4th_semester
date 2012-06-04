@@ -1,3 +1,60 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
 
-Proper implementation is proper.
+\subsection{Standard library}
+
+Hive provides for users a standard library for programing wireless sensor
+nodes. It provides an API similar to the POSIX library.
+
+\subsection{Networking}
+
+\subsection{Scheduler}
+
+Most of work on a wireless sensor node is triggered by an event. For example
+we read the temperature sensor every 5 minutes, which is a timer event, or an
+actual event happens on the node, for example a packet arrives.
+
+The job of the scheduler is to provide a way to register for and notify of
+events. It's split into two parts, a platform agnostic one and a platform
+specific one. The platform agnostic part contains the API for users to use the
+scheduler. It allows specifing callback for events or timers:
+
+\begin{lstlisting}
+typedef void (*callback_t)(void *arg);
+void schedule_timer(struct scheduler *scheduler,
+                    /* Timeout in miliseconds *?
+                    int timeout, 
+                    /* Callback function */
+                    callback_t *cb, 
+                    /* Argument to be passed to the callback */
+                    void *arg);
+\end{lstlisting}
+The platform specific part contains the platform dependent implementation of
+the scheduler. Each platform has a different implementation for timers so each
+platform will have to implement its own version of this. For example linux has
+timerfds, but an Atmega microcontroller has hardware timers. The scheduler
+implementation for that platform will use what the platform provides.
+
+The implementation of the scheduler on the simulation platform will be done
+using libevent. The libevent API provides a mechanism to execute a callback
+function when a specific event occurs on a file descriptor or after a timeout
+has been reached. Furthermore, libevent also support callbacks due to signals
+or regular timeouts. Libevent uses the event loop mechanisms provided by the
+system on which it runs. This can be /dev/poll, kqueue, select, event ports,
+poll, epoll.
+
+\subsection{Accounting}
+
+Everything that runs on a node consumes some power and the simulator will have
+to reflect that in the battery level of the node. For example reading a sensor
+will consume a small part of the battery while sending messages to a node will
+consume much more power, depending on the distance of the target node from the
+source node.
+
+Every event on a simulated node will pass one or more times through the
+scheduler. This will happen either a normal timer event or by the simulator
+part of the driver for the component. If a timer expires, we call the callback
+function which means the node is running some code and we will be able to
+estimate how much battery it consumes based on the time the callback takes.
+For a network packet we will be able to do the accouting when the packet
+reaches the physical layer of the simulator where it will be able to compute
+the power consumption to communicate with the target node.
