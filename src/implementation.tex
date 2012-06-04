@@ -1,5 +1,11 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
 
+The Hive simulator is implemented in a mix of C and C++. C is used in the core
+library that will also be used on physical nodes. C++ is used in the
+simulator so we can use the Standard Template Library. While C++ could also be
+used on a node it consumes more memory than C and the nodes usually do not
+have too much memory.
+
 \subsection{Standard library}
 
 In order for the wireless sensor nodes to be usefull they will have to be
