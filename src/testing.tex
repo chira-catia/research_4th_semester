@@ -5,8 +5,19 @@ it and get reliable results but we will outline our plans for
 testing it here.
 
 \begin{itemize}
+	\item API testing will be done using a simple protocol
+	uses as source and destination node ids. This will be used
+	for testing changes to the API as the network system will not
+	have to much work to do here.
+	\item Test for each of the supported protocols. Packets
+	will be dumped to a file and analyzed to see if they conform
+	to the specification of the protocols.
 	\item Scalability. We will like to know how many nodes
 	the simulator will be able to simulate. We would also
 	like to do profiling on these test to see where it
 	spends most of its times and if we can further improve
+	\item Node complexity. We would also like to see how
+	many nodes we can simulate doing complex things. This
+	will be done with infinite battery and doing high network
+	traffic.
 \end{itemize}
