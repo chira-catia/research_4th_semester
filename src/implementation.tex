@@ -2,10 +2,18 @@
 
 \subsection{Standard library}
 
-Hive provides for users a standard library for programing wireless sensor
-nodes. It provides an API similar to the POSIX library.
+In order for the wireless sensor nodes to be usefull they will have to be
+programmed to do a certain task. For this, Hive provides an API. It allows
+common tasks like scheduling a timer or creating sockets. 
+
+This API provided by Hive is platform agnostic. The code is loadable in the
+simulator as plugin using libdl. When used on a physical node, the plugin must
+provide only a load rutine. When ran on the simulator platform, the plugin
+should also provide a start, stop and unload rutine.
 
 \subsection{Networking}
+
+\includegraphics[scale=0.75]{img/networking.pdf}
 
 \subsection{Scheduler}
 
