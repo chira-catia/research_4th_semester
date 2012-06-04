@@ -2,10 +2,48 @@
 
 \subsection{Standard library}
 
-Hive provides for users a standard library for programing wireless sensor
-nodes. It provides an API similar to the POSIX library.
+In order for the wireless sensor nodes to be usefull they will have to be
+programmed to do a certain task. For this, Hive provides an API. It allows
+common tasks like scheduling a timer or creating sockets. 
+
+This API provided by Hive is platform agnostic. The code is loadable in the
+simulator as plugin using libdl. When used on a physical node, the plugin must
+provide only a load rutine. When ran on the simulator platform, the plugin
+should also provide a start, stop and unload rutine.
 
 \subsection{Networking}
+
+Hive provides an API similar to the BSD sockets one. The functions name are
+all appended with sys so they don't collide with the ones from glibc. It
+contains just a small subset of BSD sockets API, but it will be extended if
+it will be needed.
+\begin{lstlisting}
+sys_socket(int type, int protocol);
+sys_sendto(int sock, char *buff, int size, sockaddr *to)
+sys_recvfrom(int sock, char *buff, int size, sockaddr *from);
+\end{lstlisting}
+The plugin needs to specify the protocol used only when the socket is created,
+but for all subsequent calls this will be handled by internal systems. 
+
+\includegraphics[scale=0.75]{img/networking.pdf}
+
+The flow of a network packet will start in the plugin. It will create a socket
+using sys\_socket and will be able to send data using sys_sendto. In the
+networking system a packet will be created in which the data from the buff
+argument will be copied. This packet will be passed to the protocol for this
+socket which will add the protocol specific headers to it based on internal
+structures. When the protocol is done with the packet, it is passed to a
+driver for a network device.
+
+On a physical node, the network device driver will send the packet to the
+destination node using WiFi, radio, etc... On the simulator platform, the
+packet is passed back to the simulator which maintains a packet queus for each
+node and will route the packet to the appropriate node.
+
+On the receive side, the simulator periodically checks the receive packet
+queues for nodes and sends a notification to the node to start processing it.
+The packet will go through the network device driver, which will pass it to
+the protocol which will pass it to the plugin after removing all headers.
 
 \subsection{Scheduler}
 
