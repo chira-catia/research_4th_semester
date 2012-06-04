@@ -6,6 +6,14 @@ simulator so we can use the Standard Template Library. While C++ could also be
 used on a node, it consumes more memory than C and the nodes usually do not
 have too much memory.
 
+\subsection{Sensors}
+Sensors will be implemented in C++ as a class having some proprierties such as
+battery, CPU, etc. We will have a set of predefined node types that can be
+instantiated but we will also expose a basic API for creating other types of
+nodes. Basically, when a simulation will be started a node type will be
+specified which will result in specific properties for that node. Also, at the
+creation time of a node, the stack protocol to be used by that specific node could be given.
+
 \subsection{Standard library}
 
 In order for the wireless sensor nodes to be useful they will have to be
