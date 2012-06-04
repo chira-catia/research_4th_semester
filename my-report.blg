@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: my-report.aux
+The style file: abbrv.bst
+Database file #1: my-report.bib
+Warning--empty journal in tossim
+You've used 2 entries,
+            2118 wiz_defined-function locations,
+            508 strings with 4055 characters,
+and the built_in function-call counts, 693 in all, are:
+= -- 73
+> -- 14
+< -- 2
++ -- 6
+- -- 4
+* -- 35
+:= -- 110
+add.period$ -- 7
+call.type$ -- 2
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 3
+duplicate$ -- 35
+empty$ -- 63
+format.name$ -- 4
+if$ -- 156
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 13
+num.names$ -- 4
+pop$ -- 12
+preamble$ -- 1
+purify$ -- 6
+quote$ -- 0
+skip$ -- 26
+stack$ -- 0
+substring$ -- 45
+swap$ -- 12
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 1
+while$ -- 10
+width$ -- 3
+write$ -- 24
+(There was 1 warning)

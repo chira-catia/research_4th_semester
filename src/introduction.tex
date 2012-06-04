@@ -1,27 +1,33 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
-\textit{Hive} is a Wireless Sensors Network Simulator that is intended to be
+\textit{Hive} is a Wireless Sensor Network Simulator that is intended to be
 used for simulating routing protocols for Wireless Sensors Networks in order
 to determine the best suited protocol for a given topology.
-There exist a number of simulators used for simulating wireless sensor
-networks such as NS-2, J-sim and TOSSIM. We will not go into details regarding
+There exist a number of simulators used for simulating Wireless Sensor
+Networks such as NS-2, J-sim\cite{jsim-article} and TOSSIM\cite{tossim}. We will not go into details regarding
 these simulator since this was covered in our previous work. What is to be
-noted though is that after the survey we did on these simulators we were able
+noted though is that, after the survey we did on these simulators, we were able
 to define some key features that we wanted the \textit{Hive} simulator to
 have, such as, but not limited to: to be component based in order to make it easy to extend and to make future development easier to
 be done, to be able to simulate a wide variety of nodes in order to not be
 limited to only some sensors types, to make it easy to write code that is to
 be run on nodes in order to make the implementation of the routing protocols
 easier to be done and, after looking at the trends in the Wireless Sensor
-Networks research we decided that the simulator should, in the begining
+Networks research, we decided that the simulator should, in the begining
 support at least the 6LoWPAN and ZigBee protocol stacks.
-
+Also, unlike some of the simulators enumerated above, \textit{Hive} targets topologies of Wireless Sensor
+Networks and so, during the desing and implementation phases decisions were
+made so that \textit{Hive} could simulate as accurate as possible a real
+sensor.
 
 The structure of the paper is at follows: in section 2 we present the
-\textit{Architecture} of the \textit{Hive} simulator, we discuss the reasons for which such
+\textit{Architecture} of the \textit{Hive} simulator, discussing the reasons for which such
 an architecture was chosen and present the communication mechanisms between
-components. Then the implementation section follows where we briefly present
+the components. Then, the \textit{Implementation} section follows where we briefly present
 the libraries and tools used for implementation and the reasons for which we
 chose to use these and, also, go into some details concerning the implementation.
+In section \textit{Testing} we present the tests we want to do in
+order to test the way \textit{Hive} behaves and to be able to provide some
+numbers for the scalability matter.
 %//TODO:?? Experimental setup and Scenario and Results sections
 In the end some conclusions are drawn, and the next steps are highlighted in
-the \textit{Conclusions and Further work section}. 
+the \textit{Conclusions and Further Work} section. 

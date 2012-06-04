@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{jsim-article}
+{A. Sobeih and M. Viswanathan and D. Marinov and J.C. Hou}.
+\newblock {J-Sim: An integrated environment for simulation and model checking
+  of network protocols}.
+\newblock In {\em IEEE International Parallel and Distributed Processingi
+  Symposium}, pages 1--6. IEEE Computer Society, 2007.
+
+\bibitem{tossim}
+{Philip Levis and Nelson Lee}.
+\newblock {TOSSIM: A simulator for TinyOS Networks}.
+\newblock pages 1--17, September 2003.
+
+\end{thebibliography}
