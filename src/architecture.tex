@@ -1,5 +1,12 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
 
+The Hive simulator can be broken into three parts:
+\begin{itemize}
+  \item Plugins or node specific code
+  \item Platform agnostic code accessed by a standard library
+  \item Platform specific code used by the standard library
+\end{itemize}
+
 A wireles sensor node node running in a Hive simulation is 
 represented by a dynamic library, which we will call plugin. This library contains the code 
 which would normally run on the node, with a few simple extra methods
@@ -12,6 +19,14 @@ initialisation, the sensor will set a timer to run once every 5 minutes to
 read temperature and another one for the noise sensor to run once every
 minute. The plugin will collect the data from these sensors in internal memory
 and set a timer to send the data to a master node once every 30 minutes.
+Apart from scheduling work to be done, the plugin can also interact with other
+node by sending data. It uses an API similar to BSD sockets that abstract the
+networking system.
+
+The simulator is implemented as a platform for Hive. It has its own scheduler
+and implementation for network devices. Code running on the simulated node
+will always pass through the scheduler so the simulator can take appropriate
+actions based on the event.
 
 \subsection{Networking}
 
