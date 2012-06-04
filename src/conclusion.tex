@@ -1,4 +1,12 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
+\textit{Hive} is a Wireless Sensor Network simulator incorporating some of the
+key design features of some of the surveyed simulators: it has a component
+based architecture, uses a modular implementation, it is easy to use by being
+able to control its actions over a tcp-socket by using a simple list of
+commands as shown in section \textit{2.1 Controlling the simulator}.
+It is written in C and C++ and uses a portable library (libevent) to handle
+events in order to make the whole simulator easy to port on other platforms
+than Unix.
 
 The desing of the \textit{Hive} simulator provides an easy-to-use interface
 for adding support for other protocol stacks and also for adding new types of
