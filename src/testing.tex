@@ -1,23 +1,24 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
 
-The Hive simulate isn't yet in state where we can do testing on
-it and get reliable results but we will outline our plans for 
-testing it here.
+The \textit{Hive} simulator is not yet in a state where we can do testing on
+it and get reliable results but  we intend to test each of its features; here
+we outline our plans for testing the simulator.
 
 \begin{itemize}
-	\item API testing will be done using a simple protocol
-	uses as source and destination node ids. This will be used
+	\item \textit{API testing} will be done using a simple protocol
+	which uses as source and destination nodes the nodes ids. This will be used
 	for testing changes to the API as the network system will not
-	have to much work to do here.
-	\item Test for each of the supported protocols. Packets
+	have too much work to do for this simple protocol.
+	\item The second test phase will be to \textit{test each of the
+        supported protocols}. Packets
 	will be dumped to a file and analyzed to see if they conform
-	to the specification of the protocols.
-	\item Scalability. We will like to know how many nodes
-	the simulator will be able to simulate. We would also
-	like to do profiling on these test to see where it
-	spends most of its times and if we can further improve
-	\item Node complexity. We would also like to see how
-	many nodes we can simulate doing complex things. This
+	to the specifications of the protocols.
+	\item \textit{Scalability} - We want to know how many nodes
+	the simulator will be able to simulate. We also
+	intend to do profiling on these tests to see where the simulator
+	spends most of the time and, after investigating this, to decide if we can further improve it.
+	\item \textit{Node complexity} We also want to see how
+	many nodes doing complex things \textit{Hive} can simulate. This
 	will be done with infinite battery and doing high network
 	traffic.
 \end{itemize}

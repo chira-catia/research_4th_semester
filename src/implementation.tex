@@ -1,28 +1,27 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
 
-The Hive simulator is implemented in a mix of C and C++. C is used in the core
+The \textit{Hive} simulator is implemented in a mix of C and C++. C is used in the core
 library that will also be used on physical nodes. C++ is used in the
 simulator so we can use the Standard Template Library. While C++ could also be
-used on a node it consumes more memory than C and the nodes usually do not
+used on a node, it consumes more memory than C and the nodes usually do not
 have too much memory.
 
 \subsection{Standard library}
 
-In order for the wireless sensor nodes to be usefull they will have to be
-programmed to do a certain task. For this, Hive provides an API. It allows
+In order for the wireless sensor nodes to be useful they will have to be
+programmed to do a certain task. For this, \textit{Hive} provides an API. It allows
 common tasks like scheduling a timer or creating sockets. 
 
-This API provided by Hive is platform agnostic. The code is loadable in the
-simulator as plugin using libdl. When used on a physical node, the plugin must
-provide only a load rutine. When ran on the simulator platform, the plugin
-should also provide a start, stop and unload rutine.
+This API provided by \textit{Hive} is platform agnostic. The code is loadable in the
+simulator as a plugin using \textit{libdl}. When used on a physical node, the plugin must
+provide only a load routine. When ran on the simulator platform, the plugin
+should also provide a start, stop and unload routine.
 
 \subsection{Networking}
 
-Hive provides an API similar to the BSD sockets one. The functions name are
-all appended with sys so they don't collide with the ones from glibc. It
-contains just a small subset of BSD sockets API, but it will be extended if
-it will be needed.
+\textit{Hive} provides an API similar to the BSD sockets one. The functions name are
+all appended with sys so they do not collide with the ones from glibc. The API
+contains just a small subset of BSD sockets one, but it will be extended if needed.
 \begin{lstlisting}
 sys_socket(int type, int protocol);
 sys_sendto(int sock, char *buff, int size, sockaddr *to)
@@ -39,22 +38,23 @@ but for all subsequent calls this will be handled by internal systems.
 \end{figure}
 
 The flow of a network packet will start in the plugin. It will create a socket
-using sys\_socket and will be able to send data using sys_sendto. In the
+using sys\_socket and will be able to send data using sys\_sendto. In the
 networking system a packet will be created in which the data from the buff
 argument will be copied. This packet will be passed to the protocol for this
 socket which will add the protocol specific headers to it based on internal
-structures. When the protocol is done with the packet, it is passed to a
+structures. When the protocol is done with the packet, the packet is passed to a
 driver for a network device.
 
 On a physical node, the network device driver will send the packet to the
-destination node using WiFi, radio, etc... On the simulator platform, the
-packet is passed back to the simulator which maintains a packet queus for each
+destination node using WiFi, radio, etc. On the simulator platform, the
+packet is passed back to the simulator which maintains a packet queue for each
 node and will route the packet to the appropriate node.
 
 On the receive side, the simulator periodically checks the receive packet
-queues for nodes and sends a notification to the node to start processing it.
+queues for nodes and sends a notification to the node to start processing a
+packet if one was received.
 The packet will go through the network device driver, which will pass it to
-the protocol which will pass it to the plugin after removing all headers.
+the protocol which will then pass it to the plugin after removing all headers.
 
 \subsection{Scheduler}
 
@@ -63,9 +63,9 @@ we read the temperature sensor every 5 minutes, which is a timer event, or an
 actual event happens on the node, for example a packet arrives.
 
 The job of the scheduler is to provide a way to register for and notify of
-events. It's split into two parts, a platform agnostic one and a platform
-specific one. The platform agnostic part contains the API for users to use the
-scheduler. It allows specifing callback for events or timers:
+events. The scheduler is split in two parts: a platform agnostic one and a platform
+specific one. The platform agnostic part contains the API needed by users in
+order to to use the scheduler. It allows specifing callbacks for events or timers:
 
 \begin{lstlisting}
 typedef void (*callback_t)(void *arg);
@@ -79,12 +79,12 @@ void schedule_timer(struct scheduler *scheduler,
 \end{lstlisting}
 The platform specific part contains the platform dependent implementation of
 the scheduler. Each platform has a different implementation for timers so each
-platform will have to implement its own version of this. For example linux has
+platform will have to implement its own version of this part. For example Linux has
 timerfds, but an Atmega microcontroller has hardware timers. The scheduler
-implementation for that platform will use what the platform provides.
+implementation for that platform will use the functions and functionality that the platform provides.
 
 The implementation of the scheduler on the simulation platform will be done
-using libevent\cite{libevent}. The libevent API provides a mechanism to execute a callback
+using libevent\cite{libevent} library. The libevent API provides a mechanism to execute a callback
 function when a specific event occurs on a file descriptor or after a timeout
 has been reached. Furthermore, libevent also support callbacks due to signals
 or regular timeouts. Libevent uses the event loop mechanisms provided by the
@@ -93,6 +93,10 @@ poll, epoll.
 
 \subsection{Accounting}
 
+The Accounting component is needed to get some information about the
+status of the sensor: the battery status, the predicted lifetime of the
+sensor, etc. 
+
 Everything that runs on a node consumes some power and the simulator will have
 to reflect that in the battery level of the node. For example reading a sensor
 will consume a small part of the battery while sending messages to a node will
@@ -100,7 +104,7 @@ consume much more power, depending on the distance of the target node from the
 source node.
 
 Every event on a simulated node will pass one or more times through the
-scheduler. This will happen either a normal timer event or by the simulator
+scheduler. This will happen either as a normal timer event or from the simulator
 part of the driver for the component. If a timer expires, we call the callback
 function which means the node is running some code and we will be able to
 estimate how much battery it consumes based on the time the callback takes.
