@@ -1,16 +1,34 @@
 % vim: set tw=78 sts=2 sw=2 ts=8 aw et ai:
+
 The desing of the \textit{Hive} simulator provides an easy-to-use interface
 for adding support for other protocol stacks and also for adding new types of
 nodes by defining values for sensor properties such as power, CPU, resources
 consumed when sending/receiving a message, etc making it a useful tool for
 research purposes.
+%porting to other platforms
 The effort needed to port \textit{Hive} simulator to another platform should
 not be too big since the changes are limited to the physical platform
 code-area.
+
 %testing
+The first thing that needs to be completed at this stage before adding more
+functionality or improving usablitity is finishing the testing phase. It is
+important to establish the way \textit{Hive} simulator behaves both from the
+functionality point of view but also, from a scalability point of view.
+
 %tools for viewing the traffic
-There are a number of features that we want to add to the simulator such as: a
-GUI in order to make it easier to use - at first limited to selecting nodes
-or componet types and adding them in a 2D space and later, at a more developed phase, it could
+Then it would be very useful to have a traffic tool for capturing and
+analyzing the traffic from the Wireless Sensor Network. This needs also to be
+added and it could easily be implemented by adding a hook at
+the physical layer level of the simulator.
+
+%implementing routing protocols
+The final step that needs to be done in order for \textit{Hive} to be fully
+functional is adding a routing protocol and analyzing the results.
+
+%GUI
+A features that would increase \textit{Hive}'s usability is a GUI: at first
+providing basic functionality such as permiting the selection of nodes
+or componet types and adding them in a 2D space and, later, at a more developed phase, it could
 permit to create a more realistic scenario by incorporating obstacles, natural
 phenomena, etc.  
